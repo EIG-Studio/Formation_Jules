@@ -1,18 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://6k62lyby0s48"]
+[gd_scene load_steps=8 format=3 uid="uid://kh4gm574kqyk"]
 
 [ext_resource type="PackedScene" uid="uid://ce0jdlgfppv5x" path="res://Menus/parallax.tscn" id="1_8tpfj"]
+[ext_resource type="PackedScene" uid="uid://bfwxxp53rryfa" path="res://Menus/setting_button.tscn" id="1_wue36"]
 [ext_resource type="Texture2D" uid="uid://51pxtfjff6fb" path="res://assets/sprite/menu/title_menu.png" id="2_2c3vv"]
 [ext_resource type="Texture2D" uid="uid://ctjtlfgkh6woo" path="res://assets/sprite/menu/play_button.png" id="3_k3wps"]
 [ext_resource type="Texture2D" uid="uid://de43l43g5dyv3" path="res://assets/sprite/menu/exit_button.png" id="4_swupm"]
 
-[sub_resource type="GDScript" id="GDScript_fmcy2"]
+[sub_resource type="GDScript" id="GDScript_n6qua"]
 script/source = "extends Button
+
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Menus/game.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_xuw5a"]
+script/source = "extends Button
+
 
 func _pressed():
 	get_tree().quit()
 "
 
-[node name="Control" type="Control"]
+[node name="Node" type="Node"]
+
+[node name="Control2" parent="." instance=ExtResource("1_wue36")]
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,29 +36,31 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Parallax" parent="." instance=ExtResource("1_8tpfj")]
-position = Vector2(-340, 84)
+[node name="Parallax" parent="Control" instance=ExtResource("1_8tpfj")]
+position = Vector2(99, 113)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_2c3vv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -99.0
 offset_right = 99.0
-offset_bottom = 211.0
+offset_bottom = 176.0
 grow_horizontal = 2
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Start" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("3_k3wps")
+script = SubResource("GDScript_n6qua")
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 10
 icon = ExtResource("4_swupm")
-script = SubResource("GDScript_fmcy2")
+script = SubResource("GDScript_xuw5a")
+
+[connection signal="pressed" from="Control/VBoxContainer/Start" to="Control/VBoxContainer/Start" method="_on_pressed"]

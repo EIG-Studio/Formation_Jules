@@ -14,3 +14,7 @@ config/name="Defender"
 run/main_scene="res://Menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
