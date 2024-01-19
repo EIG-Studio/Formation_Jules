@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce0jdlgfppv5x"]
+
+[ext_resource type="Texture2D" uid="uid://cvyaed36d7jd6" path="res://assets/sprite/menu/menu_back_1.png" id="1_0v671"]
+[ext_resource type="Texture2D" uid="uid://yirtr5w4ep1k" path="res://assets/sprite/menu/menu_back_2.png" id="2_mycya"]
+[ext_resource type="Texture2D" uid="uid://bxjvckmf75ovq" path="res://assets/sprite/menu/menu_back_3.png" id="3_2p5xe"]
+
+[sub_resource type="GDScript" id="GDScript_6jobj"]
+script/source = "extends ParallaxBackground
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	scroll_offset.x -= 40*delta 
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_r12v8"]
+
+[node name="Parallax" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = SubResource("GDScript_6jobj")
+
+[node name="Space" type="Sprite2D" parent="ParallaxBackground"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(575.75, 323.75)
+scale = Vector2(1152.5, 648.5)
+texture = SubResource("CanvasTexture_r12v8")
+
+[node name="Layer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Star 1" type="Sprite2D" parent="ParallaxBackground/Layer"]
+position = Vector2(960, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_0v671")
+
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Star 2" type="Sprite2D" parent="ParallaxBackground/Layer2"]
+position = Vector2(960, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_mycya")
+
+[node name="Layer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Star 3" type="Sprite2D" parent="ParallaxBackground/Layer3"]
+position = Vector2(960, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_2p5xe")
